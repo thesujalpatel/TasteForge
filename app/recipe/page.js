@@ -135,7 +135,7 @@ export default function HomePage() {
   };
 
   return (
-    <motion.main {...fadeIn} className="max-w-5xl mx-auto px-4 py-8 ">
+    <motion.main {...fadeIn} className="max-w-5xl mx-auto px-4 py-8">
       <motion.h1
         {...fadeIn}
         className="text-3xl font-bold text-center text-primary"

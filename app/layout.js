@@ -48,6 +48,17 @@ export default function RootLayout({ children }) {
       >
         <Navbar />
         {children}
+        <footer
+          style={{
+            textAlign: "center",
+            marginTop: "2rem",
+            fontSize: "0.9rem",
+            color: "#888",
+            marginBottom: "1rem",
+          }}
+        >
+          &copy; {new Date().getFullYear()} Sujal Patel. All rights reserved.
+        </footer>
       </body>
     </html>
   );
