@@ -1,3 +1,4 @@
+import { TiHeartFullOutline } from "react-icons/ti";
 import {
   Courgette,
   Playwrite_IN,
@@ -6,6 +7,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import Navbar from "./navigation";
+import Link from "next/link";
 
 const courgette = Courgette({
   variable: "--font-courgette",
@@ -44,10 +46,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${courgette.variable} ${playwrite_IN.variable} ${delius.variable} ${monsieur_La_Doulaise.variable} antialiased ${courgette.className}`}
+        className={`${courgette.variable} ${playwrite_IN.variable} ${delius.variable} ${monsieur_La_Doulaise.variable} antialiased ${courgette.className} selection:bg-primary selection:text-background `}
       >
         <Navbar />
-        {children}
+        <div className="min-h-[80vh]">{children}</div>
         <footer
           style={{
             textAlign: "center",
@@ -57,6 +59,16 @@ export default function RootLayout({ children }) {
             marginBottom: "1rem",
           }}
         >
+          <div className="text-lg text-foreground">
+            <Link
+              href="https://thesujalpatel.github.io/"
+              className="flex justify-center items-center"
+            >
+              made with
+              <TiHeartFullOutline className="inline text-red-500 mx-[0.3ch]" />
+              by Sujal
+            </Link>
+          </div>
           &copy; {new Date().getFullYear()} Sujal Patel. All rights reserved.
         </footer>
       </body>

@@ -14,7 +14,7 @@ export default function Home() {
     },
   };
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="max-w-5xl w-full absolute top-1/2 left-1/2 -translate-1/2 mx-auto px-4 py-8">
       <motion.h1
         {...fadeIn}
         className="text-3xl font-bold text-center text-primary"
