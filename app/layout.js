@@ -59,7 +59,7 @@ export default function RootLayout({ children }) {
             marginBottom: "1rem",
           }}
         >
-          <div className="text-lg text-foreground">
+          <div className="text-lg text-foreground w-fit mx-auto">
             <Link
               href="https://thesujalpatel.github.io/"
               className="flex justify-center items-center"

@@ -44,23 +44,25 @@ export default function Home() {
         and <span className="text-primary font-semibold">taste adventures</span>{" "}
         every time you cook.
       </motion.p>
-      <Link href="/recipe">
-        <motion.div
-          {...fadeIn}
-          whileHover={{
-            scale: 1.02,
-          }}
-          whileTap={{ scale: 0.98 }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 15,
-          }}
-          className={`px-3 py-2 bg-primary text-background font-semibold rounded-md mt-4 w-fit min-w-50 text-center mx-auto`}
-        >
-          Lets Get Started
-        </motion.div>
-      </Link>
+      <div className="w-fit mx-auto">
+        <Link href="/recipe">
+          <motion.div
+            {...fadeIn}
+            whileHover={{
+              scale: 1.02,
+            }}
+            whileTap={{ scale: 0.98 }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 15,
+            }}
+            className={`px-3 py-2 bg-primary text-background font-semibold rounded-md mt-4 w-fit min-w-50 text-center mx-auto`}
+          >
+            Lets Get Started
+          </motion.div>
+        </Link>
+      </div>
     </div>
   );
 }
