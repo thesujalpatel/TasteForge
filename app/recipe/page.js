@@ -108,7 +108,7 @@ export default function HomePage() {
         setRecipe(data.recipe);
         setTimeout(() => {
           window.scrollTo({
-            top: document.querySelector("#recipe")?.offsetTop - 20 || 0,
+            top: document.querySelector("#recipe")?.offsetTop - 100 || 0,
             behavior: "smooth",
           });
         }, 100);
@@ -294,12 +294,12 @@ export default function HomePage() {
         <motion.div
           {...fadeIn}
           id="recipe"
-          className="mt-6 bg-primary/5 border-2 p-10 border-primary/50 text-foreground font-[family-name:var(--font-delius)] text-lg/tight font-semibold rounded-md tracking-[1px]"
+          className="mt-6 bg-primary/5 border-2 sm:p-10 p-3 border-primary/50 text-foreground font-[family-name:var(--font-delius)] text-lg/tight font-semibold rounded-md tracking-[1px]"
         >
           <ReactMarkdown
             components={{
               h1: ({ children }) => (
-                <h1 className="text-3xl text-primary font-bold my-4 text-center font-[family-name:var(--font-playwrite)] mb-15">
+                <h1 className="text-3xl text-primary font-bold my-4 text-center font-[family-name:var(--font-playwrite)] sm:mb-15 mb-5">
                   {children}
                 </h1>
               ),
