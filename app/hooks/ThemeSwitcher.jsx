@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { PiSun, PiMoon, PiDevices } from "react-icons/pi";
 
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState("system");
@@ -38,16 +39,25 @@ export default function ThemeSwitcher() {
   };
 
   return (
-    <select
-      value={theme}
-      onChange={(e) => handleChange(e.target.value)}
-      className="bg-background text-foreground
-        border border-foreground/30 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200 ease-in-out
-      "
-    >
-      <option value="light">🌞 Light</option>
-      <option value="dark">🌚 Dark</option>
-      <option value="system">🖥️ System</option>
-    </select>
+    <div className="flex items-center gap-2">
+      <PiSun
+        className={`text-2xl cursor-pointer ${
+          theme === "light" ? "text-primary" : "text-foreground/50"
+        }`}
+        onClick={() => handleChange("light")}
+      />
+      <PiDevices
+        className={`text-2xl cursor-pointer ${
+          theme === "system" ? "text-primary" : "text-foreground/50"
+        }`}
+        onClick={() => handleChange("system")}
+      />
+      <PiMoon
+        className={`text-2xl cursor-pointer ${
+          theme === "dark" ? "text-primary" : "text-foreground/50"
+        }`}
+        onClick={() => handleChange("dark")}
+      />
+    </div>
   );
 }

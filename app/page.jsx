@@ -17,32 +17,28 @@ export default function Home() {
     <div className="max-w-5xl w-full absolute top-1/2 left-1/2 -translate-1/2 mx-auto px-4 py-8">
       <motion.h1
         {...fadeIn}
-        className="text-3xl font-bold text-center text-primary"
+        className="text-4xl font-bold text-center text-primary"
       >
         🍛 Taste Forge
       </motion.h1>
       <motion.p
         {...fadeIn}
-        className="text-lg mb-4 text-center text-foreground/50"
+        className="text-lg mb-6 text-center text-foreground/50"
       >
         Flavor. Invented. Instantly.
       </motion.p>
-      <motion.p {...fadeIn} className="text-lg mb-4 text-center">
-        <span className="text-primary font-semibold">
+      <motion.p {...fadeIn} className="text-xl mb-4 text-center">
+        <span className="text-primary">
           Transform your kitchen into a flavor laboratory
         </span>{" "}
         where inspiration meets innovation! Taste Forge fuses{" "}
-        <span className="text-primary font-semibold">
-          AI-powered creativity
-        </span>{" "}
-        with your pantry staples, conjuring{" "}
-        <span className="text-primary font-semibold">
-          bold, unexpected recipes
-        </span>
-        . Say goodbye to routine meals—embrace{" "}
-        <span className="text-primary font-semibold">culinary surprises</span>{" "}
-        and <span className="text-primary font-semibold">taste adventures</span>{" "}
-        every time you cook.
+        <span className="text-primary">AI-powered creativity</span> with your
+        pantry staples, conjuring{" "}
+        <span className="text-primary">bold, unexpected recipes</span>. Say
+        goodbye to routine meals embrace{" "}
+        <span className="text-primary">culinary surprises</span> and{" "}
+        <span className="text-primary">taste adventures</span> every time you
+        cook.
       </motion.p>
       <div className="w-fit mx-auto">
         <Link href="/recipe">
