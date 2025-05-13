@@ -2,8 +2,9 @@ import { TiHeartFullOutline } from "react-icons/ti";
 import {
   Courgette,
   Playwrite_IN,
-  Delius,
   Monsieur_La_Doulaise,
+  Edu_SA_Beginner,
+  Edu_AU_VIC_WA_NT_Hand,
 } from "next/font/google";
 import "./globals.css";
 import Navbar from "./navigation";
@@ -19,14 +20,7 @@ const courgette = Courgette({
 const playwrite_IN = Playwrite_IN({
   variable: "--font-playwrite",
   subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
-const delius = Delius({
-  variable: "--font-delius",
-  subsets: ["latin"],
-  weight: "400",
+  weight: "300",
   display: "swap",
 });
 
@@ -34,6 +28,20 @@ const monsieur_La_Doulaise = Monsieur_La_Doulaise({
   variable: "--font-monsieur-la-doulaise",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+});
+
+const edu_SA_Beginner = Edu_SA_Beginner({
+  variable: "--font-edu-sa-beginner",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const edu_AU_VIC_WA_NT_Hand = Edu_AU_VIC_WA_NT_Hand({
+  variable: "--font-edu-au-vic-wa-nt-hand",
+  subsets: ["latin"],
+  weight: "500",
   display: "swap",
 });
 
@@ -55,7 +63,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${courgette.variable} ${playwrite_IN.variable} ${delius.variable} ${monsieur_La_Doulaise.variable} antialiased ${courgette.className} selection:bg-primary selection:text-background `}
+        className={`${courgette.variable} ${playwrite_IN.variable} ${monsieur_La_Doulaise.variable} ${edu_SA_Beginner.variable} ${edu_AU_VIC_WA_NT_Hand.variable} antialiased ${edu_AU_VIC_WA_NT_Hand.className} selection:bg-primary selection:text-background `}
       >
         <Navbar />
         <div className="min-h-screen pt-20">{children}</div>

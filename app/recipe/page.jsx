@@ -136,19 +136,13 @@ export default function HomePage() {
 
   return (
     <motion.main {...fadeIn} className="max-w-5xl mx-auto px-4 py-8">
-      <motion.h1
-        {...fadeIn}
-        className="text-3xl font-bold text-center text-primary"
-      >
+      <h1 className="text-3xl font-bold text-center text-primary font-[family-name:var(--font-courgette)]">
         🍛 Taste Forge
-      </motion.h1>
-      <motion.p
-        {...fadeIn}
-        className="text-lg mb-4 text-center text-foreground/50"
-      >
+      </h1>
+      <p className="text-lg mb-4 text-center text-foreground/50 font-[family-name:var(--font-courgette)]">
         Flavor. Invented. Instantly.
-      </motion.p>
-      <motion.div {...fadeIn} className="mb-5">
+      </p>
+      <div className="mb-5">
         <div className="flex flex-wrap gap-2 overflow-x-auto p-2 mb-2 justify-center">
           {Object.keys(ingredientSuggestions).map((category) => (
             <motion.button
@@ -210,11 +204,8 @@ export default function HomePage() {
             ))}
           </motion.div>
         )}
-      </motion.div>
-      <motion.div
-        {...fadeIn}
-        className="flex flex-wrap items-center gap-2 border border-foreground/40 p-2 rounded-md"
-      >
+      </div>
+      <div className="flex flex-wrap items-center gap-2 border border-foreground/40 p-2 rounded-md">
         <AnimatePresence>
           {ingredients.map((tag, index) => (
             <motion.div
@@ -234,8 +225,7 @@ export default function HomePage() {
             </motion.div>
           ))}
         </AnimatePresence>
-        <motion.input
-          {...fadeIn}
+        <input
           value={input}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
@@ -247,9 +237,8 @@ export default function HomePage() {
           placeholder="Type and press comma or space"
           className="flex-1 min-w-[150px] border-none outline-none p-1 text-foreground bg-background"
         />
-      </motion.div>
-      <motion.select
-        {...fadeIn}
+      </div>
+      <select
         value={diet}
         onChange={(e) => setDiet(e.target.value)}
         className="mt-4 p-2 border border-foreground/40 rounded-md w-full bg-background text-foreground"
@@ -260,9 +249,8 @@ export default function HomePage() {
         <option value="keto">Keto</option>
         <option value="gluten-free">Gluten-Free</option>
         <option value="high-protein">High-Protein</option>
-      </motion.select>
+      </select>
       <motion.div
-        {...fadeIn}
         whileHover={{
           scale: 1.02,
         }}
@@ -277,7 +265,7 @@ export default function HomePage() {
           cooldown > 0 || loading
             ? "bg-primary/60 cursor-not-allowed"
             : "cursor-pointer"
-        }`}
+        } font-[family-name:var(--font-edu_QLD_Beginner)]`}
       >
         {loading
           ? "Hmm... Cooking..."
@@ -294,65 +282,50 @@ export default function HomePage() {
         <motion.div
           {...fadeIn}
           id="recipe"
-          className="mt-6 bg-primary/5 border-2 sm:p-10 p-3 border-primary/50 text-foreground font-[family-name:var(--font-delius)] text-lg/tight font-semibold rounded-md tracking-[1px]"
+          className="mt-6 bg-primary/5 border-2 sm:p-10 p-3 border-primary/50 text-foreground font-[family-name:var(--font-edu-sa-beginner)] text-2xl/tight rounded-md tracking-[1px]"
         >
           <ReactMarkdown
             components={{
               h1: ({ children }) => (
-                <h1 className="text-3xl text-primary font-bold my-4 text-center font-[family-name:var(--font-playwrite)] sm:mb-15 mb-5">
+                <h1 className="text-3xl text-primary my-4 text-center font-[family-name:var(--font-playwrite)] sm:mb-15 mb-5">
                   {children}
                 </h1>
               ),
               h2: ({ children }) => (
-                <h2 className="text-2xl font-semibold text-primary my-3 mt-6 font-[family-name:var(--font-playwrite)]">
+                <h2 className="text-2xl text-primary mt-6 my-3 font-[family-name:var(--font-playwrite)] ">
                   {children}
-                  <div className="border-b-3 border-b-primary w-full" />
+                  <div className="border-b border border-b-primary w-full" />
                 </h2>
               ),
               h3: ({ children }) => (
-                <h3 className="text-xl font-semibold text-primary my-2 mt-4 font-[family-name:var(--font-playwrite)]">
+                <h3 className="text-xl text-primary mt-2 font-[family-name:var(--font-playwrite)]">
                   {children}
-                  <div className="border-b-2 border-b-primary w-full" />
                 </h3>
               ),
               p: ({ children }) => (
-                <p className="leading-relaxed text-foreground">{children}</p>
+                <p className="text-foreground">{children}</p>
               ),
               ul: ({ children }) => (
-                <ul className="list-disc ml-6 my-2 space-y-1 text-foreground">
-                  {children}
-                </ul>
+                <ul className="list-disc ml-10 text-foreground">{children}</ul>
               ),
               ol: ({ children }) => (
-                <ol className="list-decimal ml-6 my-2 space-y-1 text-foreground">
+                <ol className="list-decimal ml-10 text-foreground">
                   {children}
                 </ol>
               ),
               li: ({ children }) => (
                 <li className="text-foreground">{children}</li>
               ),
-              code: ({ children }) => (
-                <code className="bg-foreground/10 text-primary font-mono px-1 py-0.5 rounded text-sm">
-                  {children}
-                </code>
-              ),
-              blockquote: ({ children }) => (
-                <blockquote className="border-l-4 border-primary pl-4 italic text-foreground bg-foreground/10 my-4">
-                  {children}
-                </blockquote>
-              ),
               hr: () => <hr className="hidden" />,
               strong: ({ children }) => (
-                <strong className="font-semibold text-primary">
-                  {children}
-                </strong>
+                <strong className="text-primary font-normal">{children}</strong>
               ),
             }}
           >
             {recipe.replace(/<think>[\s\S]*?<\/think>/g, "")}
           </ReactMarkdown>
           <div className="mt-10 text-4xl flex justify-end text-primary font-[family-name:var(--font-monsieur-la-doulaise)]">
-            <div className="-rotate-6 w-fit">- Taste Forge</div>
+            <div className="-rotate-6 w-fit font-bold">- Taste Forge</div>
           </div>
         </motion.div>
       )}
