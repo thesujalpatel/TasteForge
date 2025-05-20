@@ -61,7 +61,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${courgette.variable} ${playwrite_IN.variable} ${monsieur_La_Doulaise.variable} ${edu_SA_Beginner.variable} ${edu_AU_VIC_WA_NT_Hand.variable} antialiased ${edu_AU_VIC_WA_NT_Hand.className} selection:bg-primary selection:text-background `}
       >
@@ -88,6 +88,20 @@ export default function RootLayout({ children }) {
           </div>
           &copy; {new Date().getFullYear()} Sujal Patel. All rights reserved.
         </footer>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function() {
+  try {
+    const theme = localStorage.getItem('theme') || 'system';
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const themeToApply = theme === 'dark' || (theme === 'system' && prefersDark) ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', themeToApply);
+  } catch(e) {}
+})();
+          `,
+          }}
+        />
       </body>
     </html>
   );

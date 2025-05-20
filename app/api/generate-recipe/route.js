@@ -1,4 +1,3 @@
-// api/recipe/route.ts (or .js if using JS)
 export const runtime = "nodejs";
 import { NextResponse } from "next/server";
 import Groq from "groq-sdk";
@@ -37,7 +36,6 @@ The selected dietary preference is **${
       - **Do not mention diet compatibility in the recipe unless there is a real conflict.**
 
 ⚠️ This rule must be followed exactly. Include a "Notice" only when a real ingredient-diet conflict exists. If no conflict exists, the recipe must **not** mention any notice, warning, placeholder, or diet note.
-
 
 Please include:
   - A catchy dish name  
