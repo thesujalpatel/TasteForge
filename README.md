@@ -32,8 +32,8 @@ Built with Next.js and Groq AI, featuring light/dark themes and predefined categ
 
 ## Screenshots
 
-![Home Page](screensorts/SS01.png)  
-![Recipe Page](screensorts/SS02.png)
+![Home Page](screenshot/SS01.png)  
+![Recipe Page](screenshot/SS02.png)
 
 ## Installation
 
