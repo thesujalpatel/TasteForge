@@ -9,6 +9,8 @@ export default function HomePage() {
   const [ingredients, setIngredients] = useState([]);
   const [input, setInput] = useState("");
   const [diet, setDiet] = useState("");
+  const [models, setModels] = useState([]);
+  const [model, setModel] = useState("");
   const [recipe, setRecipe] = useState("");
   const [loading, setLoading] = useState(false);
   const [cooldown, setCooldown] = useState(0);
@@ -28,6 +30,26 @@ export default function HomePage() {
     }, 1000);
     return () => clearInterval(interval);
   }, [cooldown]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch("/api/models")
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error())))
+      .then((data) => {
+        if (!cancelled) {
+          setModels(data.models || []);
+          setModel(data.defaultModel || data.models?.[0] || "");
+        }
+      })
+      .catch(() => {
+        // The API can still choose its configured model if discovery is unavailable.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     let value = e.target.value;
@@ -98,6 +120,7 @@ export default function HomePage() {
         body: JSON.stringify({
           ingredients,
           diet: diet.trim(),
+          model,
         }),
       });
 
@@ -250,6 +273,20 @@ export default function HomePage() {
         <option value="gluten-free">Gluten-Free</option>
         <option value="high-protein">High-Protein</option>
       </select>
+      {models.length > 0 && (
+        <select
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+          className="mt-4 p-2 border border-foreground/40 rounded-md w-full bg-background text-foreground"
+          aria-label="AI model"
+        >
+          {models.map((availableModel) => (
+            <option key={availableModel} value={availableModel}>
+              {availableModel}
+            </option>
+          ))}
+        </select>
+      )}
       <motion.div
         whileHover={{
           scale: 1.02,

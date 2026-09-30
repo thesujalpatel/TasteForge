@@ -1,15 +1,13 @@
 export const runtime = "nodejs";
 import { NextResponse } from "next/server";
-import Groq from "groq-sdk";
-
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+import getGroqClient, { resolveModel } from "../../lib/groq";
 
 export async function POST(req) {
   try {
-    const { ingredients, diet } = await req.json();
+    const { ingredients, diet, model } = await req.json();
 
     const prompt = `Hey Chef AI! Your name is **Taste Forge**. I have the following ingredients: ${ingredients.join(
-      ", "
+      ", ",
     )}.
 
 Can you craft a delicious and creative ${
@@ -53,8 +51,8 @@ Formatting Instructions:
 
 Let’s get cooking!`;
 
-    const chatCompletion = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
+    const chatCompletion = await getGroqClient().chat.completions.create({
+      model: await resolveModel(model),
       messages: [
         {
           role: "system",
@@ -66,7 +64,6 @@ Let’s get cooking!`;
           content: prompt,
         },
       ],
-      messages: [{ role: "user", content: prompt }],
       temperature: 0.7,
     });
 
@@ -75,7 +72,7 @@ Let’s get cooking!`;
     if (!content) {
       return NextResponse.json(
         { error: "AI response was empty." },
-        { status: 500 }
+        { status: 500 },
       );
     }
     return NextResponse.json({ recipe: content });
@@ -83,7 +80,7 @@ Let’s get cooking!`;
     console.error("❌ Groq API error:", err);
     return NextResponse.json(
       { error: err.message || "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

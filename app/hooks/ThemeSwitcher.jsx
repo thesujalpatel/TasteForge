@@ -6,8 +6,23 @@ import { PiSun, PiMoon, PiDevices } from "react-icons/pi";
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState("system");
 
+  const applyTheme = (value) => {
+    let themeToApply = value;
+
+    if (value === "system") {
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      themeToApply = prefersDark ? "dark" : "light";
+    }
+
+    document.documentElement.setAttribute("data-theme", themeToApply);
+  };
+
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "system";
+    // Theme is read from browser storage after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(savedTheme);
     applyTheme(savedTheme);
 
@@ -18,19 +33,6 @@ export default function ThemeSwitcher() {
       return () => media.removeEventListener("change", handler);
     }
   }, []);
-
-  const applyTheme = (value) => {
-    let themeToApply = value;
-
-    if (value === "system") {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      themeToApply = prefersDark ? "dark" : "light";
-    }
-
-    document.documentElement.setAttribute("data-theme", themeToApply);
-  };
 
   const handleChange = (value) => {
     setTheme(value);
