@@ -11,7 +11,7 @@ export async function GET() {
     console.error("Groq model discovery error:", error);
     return NextResponse.json(
       { error: "Unable to load available AI models." },
-      { status: 503 }
+      { status: 503 },
     );
   }
 }

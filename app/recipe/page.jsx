@@ -59,7 +59,7 @@ export default function HomePage() {
     if (separators.test(value)) {
       const parts = value.split(separators).filter(Boolean);
       const uniqueParts = parts.filter(
-        (part) => !ingredients.includes(part.toLowerCase())
+        (part) => !ingredients.includes(part.toLowerCase()),
       );
 
       if (uniqueParts.length) {
@@ -172,16 +172,16 @@ export default function HomePage() {
               key={category}
               onClick={() =>
                 setActiveCategory((prev) =>
-                  prev === category ? null : category
+                  prev === category ? null : category,
                 )
               }
               whileTap={{ scale: 0.98 }}
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
               className={`px-4 py-1 rounded-full text-sm whitespace-nowrap border ${
-                activeCategory === category
-                  ? "bg-primary text-background border-primary"
-                  : "bg-background text-foreground border-foreground/20"
+                activeCategory === category ?
+                  "bg-primary text-background border-primary"
+                : "bg-background text-foreground border-foreground/20"
               }`}
             >
               {category}
@@ -299,16 +299,16 @@ export default function HomePage() {
         }}
         onClick={handleSubmit}
         className={`px-3 py-2 bg-primary text-background font-semibold rounded-md mt-4 w-fit min-w-50 text-center ${
-          cooldown > 0 || loading
-            ? "bg-primary/60 cursor-not-allowed"
-            : "cursor-pointer"
+          cooldown > 0 || loading ?
+            "bg-primary/60 cursor-not-allowed"
+          : "cursor-pointer"
         } font-[family-name:var(--font-edu_QLD_Beginner)]`}
       >
-        {loading
-          ? "Hmm... Cooking..."
-          : cooldown > 0
-          ? `Wait ${cooldown} Seconds`
-          : "Ignite The Forge!"}
+        {loading ?
+          "Hmm... Cooking..."
+        : cooldown > 0 ?
+          `Wait ${cooldown} Seconds`
+        : "Ignite The Forge!"}
       </motion.div>
       {error && (
         <motion.p {...fadeIn} className="text-red-500 mt-4">
