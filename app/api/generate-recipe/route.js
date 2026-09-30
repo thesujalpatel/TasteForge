@@ -1,6 +1,9 @@
 export const runtime = "nodejs";
 import { NextResponse } from "next/server";
-import getGroqClient, { resolveModel } from "../../lib/groq";
+import getGroqClient, {
+  getAvailableModels,
+  resolveModel,
+} from "../../lib/groq";
 
 export async function POST(req) {
   try {
@@ -51,21 +54,41 @@ Formatting Instructions:
 
 Let’s get cooking!`;
 
-    const chatCompletion = await getGroqClient().chat.completions.create({
-      model: await resolveModel(model),
-      messages: [
-        {
-          role: "system",
-          content:
-            "Your name is Taste Forge, You are a helpful assistant that generates recipes based on user-provided ingredients and dietary preferences.",
-        },
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-      temperature: 0.7,
-    });
+    const selectedModel = await resolveModel(model);
+    const messages = [
+      {
+        role: "system",
+        content:
+          "Your name is Taste Forge, You are a helpful assistant that generates recipes based on user-provided ingredients and dietary preferences.",
+      },
+      {
+        role: "user",
+        content: prompt,
+      },
+    ];
+    let chatCompletion;
+
+    try {
+      chatCompletion = await getGroqClient().chat.completions.create({
+        model: selectedModel,
+        messages,
+        temperature: 0.7,
+      });
+    } catch (error) {
+      const modelError =
+        [400, 404, 422].includes(error?.status) ||
+        /model|not found|unsupported/i.test(error?.message || "");
+      if (!modelError) throw error;
+
+      const bestModel = (await getAvailableModels())[0];
+      if (bestModel === selectedModel) throw error;
+
+      chatCompletion = await getGroqClient().chat.completions.create({
+        model: bestModel,
+        messages,
+        temperature: 0.7,
+      });
+    }
 
     const content = chatCompletion.choices?.[0]?.message?.content;
 

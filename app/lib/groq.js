@@ -5,6 +5,10 @@ const modelCache = {
   expiresAt: 0,
   models: [],
 };
+const nonChatModelPattern =
+  /(whisper|audio|speech|tts|guard|embed|compound|vision|image|safeguard|deprecated|distil)/i;
+const chatModelPattern =
+  /(llama|gpt-oss|qwen|kimi|deepseek|mistral|gemma|allam)/i;
 
 function getGroqClient() {
   if (!process.env.GROQ_API_KEY) {
@@ -22,6 +26,7 @@ function rankModel(model) {
   const id = model.id.toLowerCase();
   let score = 0;
 
+  if (id.includes("gpt-oss-120b")) score += 100;
   if (id.includes("120b")) score += 50;
   if (id.includes("70b")) score += 40;
   if (id.includes("32b")) score += 30;
@@ -42,8 +47,9 @@ export async function getAvailableModels() {
     .filter(
       (model) =>
         model.id &&
-        model.active !== false &&
-        !/(whisper|audio|speech|guard|embed|compound)/i.test(model.id),
+        model.active === true &&
+        !nonChatModelPattern.test(model.id) &&
+        chatModelPattern.test(model.id),
     )
     .map((model) => model.id)
     .sort(
